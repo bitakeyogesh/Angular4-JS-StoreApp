@@ -1,0 +1,40 @@
+<div class="navbar navbar-inverse bg-inverse">
+    <a class="navbar-brand">Checkout Component Page</a>
+</div>
+
+<div *ngIf="orderSent" class="m-a-1 text-xs-center">
+    <h2>Thanks!</h2>
+    <p>Thanks for placing your order.</p>
+    <p>We'll ship your goods as soon as possible.</p>
+    <button class="btn btn-primary" routerLink="/product">Return to Store</button>
+</div>
+
+<form *ngIf="!orderSent" (ngSubmit)="submitForm(form)" #form="ngForm" class="m-a-1" novalidate>
+    <div class="form-group">
+        <label>Enter the Name:</label>
+        <input [(ngModel)]="order.name" #name="ngModel" name="name" class="form-control" required>
+        <div *ngIf="submitted && name.invalid" class="alert alert-danger">
+            Name is required!
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Enter the Address:</label>
+        <input [(ngModel)]="order.address" #address="ngModel" name="address" class="form-control" required>
+        <div *ngIf="submitted && address.invalid" class="alert alert-danger">
+            Address is required!
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Enter the contactno:</label>
+        <input [(ngModel)]="order.contactno" #contactno="ngModel" name="contactno" class="form-control" required>
+        <div *ngIf="submitted && contactno.invalid" class="alert alert-danger">
+            Contactnumber is required!
+        </div>
+    </div>
+
+    <div class="text-xs-center">
+        <button class="btn btn-primary" type="submit">Complete Order</button>
+        <button class="btn btn-secondary" routerLink="/cart">Back</button>
+    </div>
+</form>

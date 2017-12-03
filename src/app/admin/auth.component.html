@@ -1,0 +1,22 @@
+<div class="navbar navbar-inverse bg-inverse">
+    <a class="navbar-brand">Authentication Page</a>
+</div>
+
+<div *ngIf="errorMessage != null" class="alert alert-danger text-xs-center">
+    {{errorMessage}}
+</div>
+
+<form (ngSubmit)="submitForm(form)" #form="ngForm" class="m-a-1" novalidate>
+    <div class="form-group">
+        <label>Enter the Username:</label>
+        <input [(ngModel)]="username" name="username" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label>Enter the Password:</label>
+        <input [(ngModel)]="password" name="password" class="form-control" required>
+    </div>
+    <div class="text-xs-center">
+        <button class="btn btn-primary" type="submit">Login</button>
+        <button class="btn btn-secondary" routerLink="/">Go to Products</button>
+    </div>
+</form>

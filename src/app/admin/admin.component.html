@@ -1,0 +1,76 @@
+<div class="navbar navbar-inverse bg-inverse">
+    <a class="navbar-brand">Admin Module Main Page</a>
+</div>
+
+
+<div class="m-a-1">
+    <h2 class="text-xs-center">Product Catalog</h2>
+    <table class="table table-borderd table-striped p-a-1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td>
+                    {{product.name}}
+                </td>
+                <td>
+                    {{product.category}}
+                </td>
+                <td>
+                    {{product.description}}
+                </td>
+                <td>
+                    {{product.price}}
+                </td>
+                <td class="text-xs-center">
+                    <button class="btn btn-sm btn-success" (click)="getProductById(product.id)">
+                        Edit
+                    </button>
+                </td>
+                <td class="text-xs-center">
+                    <button class="btn btn-sm btn-success" (click)="removeProductById(product.id)">
+                        Remove
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<form [formGroup] = "productFormGroup" (ngSubmit)="saveOrUpdateProduct()" class="m-a-1" novalidate>
+    <div class="form-group">
+        <label>Enter the name:</label>
+        <input class="form-control" formControlName="name">
+    </div>
+    <div class="form-group">
+        <label>Enter the category:</label>
+        <input class="form-control" formControlName="category">
+    </div>
+    <div class="form-group">
+        <label>Enter the description:</label>
+        <input class="form-control" formControlName="description">
+    </div>
+    <div class="form-group">
+        <label>Enter the price:</label>
+        <input class="form-control" formControlName="price">
+    </div>
+    <div class="text-xs-center">
+        <button *ngIf="productId == null" class="btn btn-primary" type="submit">Add Product</button>
+        <button *ngIf="productId != null" class="btn btn-primary" type="submit">Update Product</button>
+    </div>
+</form>
+
+<div *ngIf="statusCode == 201" class="alert alert-danger text-xs-center">
+    Record added successfully
+</div>
+<div *ngIf="statusCode == 200" class="alert alert-danger text-xs-center">
+    Record updated/deleted successfully
+</div>
+<button class="btn btn-block btn-danger" (click)="logout()">
+    Logout
+</button>

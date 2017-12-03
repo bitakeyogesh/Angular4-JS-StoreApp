@@ -1,0 +1,69 @@
+<div class="navbar navbar-inverse bg-inverse">
+    <a class="navbar-brand">Cart Details Component Page</a>
+</div>
+<div class="m-a-1">
+    <h2 class="text-xs-center">
+        Your Cart
+    </h2>
+    <table class="table table-borderd table-striped p-a-1">
+        <thead>
+            <tr>
+                <th>Quantity</th>
+                <th>Product</th>
+                <th class="text-xs-right">Price</th>
+                <th class="text-xs-right">SubTotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="items.length == 0">
+                <td colspan="4" class="text-xs-center">
+                    Your cart is empty
+                </td>
+            </tr>
+            <tr *ngFor="let item of items">
+                <td>
+                    <input type="number"  
+                        class = "form-control-sm"  
+                        style = "width:5em"
+                        [value] = "item.quantity"
+                (change) = "updateProductToCart(item.product, $event.target.value)">
+                </td>
+                <td>
+                    {{item.product.name}}
+                </td>
+                <td class="text-xs-right">
+                    {{item.product.price | currency:'INR':'symbol':'3.2-2' }}
+                </td>
+                <td class="text-xs-right">
+                    {{item.subTotal | currency:'INR':'symbol':'3.2-2' }}
+                </td>
+                <td class="text-xs-center">
+                    <button class="btn btn-sm btn-danger"
+                        (click)="removeProductFromCart(item.product.id)">
+                        Remove
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-xs-right">Total:</td>
+                <td class="text-xs-right">
+                    {{cartService.total | currency:'INR':'symbol':'3.2-2' }}
+                </td>    
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="text-xs-center">
+    <button class="btn btn-primary" routerLink="/product">Continue Shopping</button>
+    <button class="btn btn-secondary" routerLink="/checkout" 
+        [disabled]="items.length == 0">
+        Checkout
+    </button>
+</div>
+
+
+
+
+
